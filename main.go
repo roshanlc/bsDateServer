@@ -2,22 +2,23 @@ package main
 
 import (
 	"fmt"
-	"github.com/JankariTech/GoBikramSambat"
-	"github.com/gorilla/mux"
 	"log"
 	"net/http"
 	"strconv"
 	"strings"
+
+	bsdate "github.com/JankariTech/GoBikramSambat"
+	"github.com/gorilla/mux"
 )
 
 func homePage(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Bikram Sambat Server")
+	fmt.Fprint(w, "Bikram Sambat Server")
 }
 
 func getAdFromBs(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	if r.Method != "GET" {
-		http.Error(w, "Could not create " + r.Method + " request ", http.StatusBadRequest)
+		http.Error(w, "Could not create "+r.Method+" request ", http.StatusBadRequest)
 		return
 	}
 	dateString := vars["date"]
@@ -35,14 +36,14 @@ func getAdFromBs(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		gregorianDate, _ := date.GetGregorianDate()
-		fmt.Fprintf(w, gregorianDate.Format("2006-01-02"))
+		fmt.Fprint(w, gregorianDate.Format("2006-01-02"))
 	}
 }
 
 func getBsFromAd(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	if r.Method != "GET" {
-		http.Error(w, "Could not create " + r.Method + " request ", http.StatusBadRequest)
+		http.Error(w, "Could not create "+r.Method+" request ", http.StatusBadRequest)
 		return
 	}
 	dateString := vars["date"]
